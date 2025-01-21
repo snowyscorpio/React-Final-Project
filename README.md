@@ -23,6 +23,10 @@ This repository contains a full-stack project using React for the frontend and N
    - Features a footer with attribution to the creators.
    - A consistent logo and theme across all pages.
 
+5. **Dynamic Flower Pages**:
+   - Individual pages for each bouquet are dynamically rendered using `react-router-dom` and the `SinglePage` component.
+   - Bouquet details are passed to the `SinglePage` component through the route state.
+
 ## Project Structure
 
 ```plaintext
@@ -67,8 +71,41 @@ This repository contains a full-stack project using React for the frontend and N
 
 ---
 
-## How to Run
+## Dynamic Flower Pages
 
+The application dynamically renders detailed pages for each bouquet using React Router and the `SinglePage` component.
+
+1. **Dynamic Routing**:
+   - Implemented in `MyRoutes.jsx`:
+     ```javascript
+     <Route path='/post/:id' element={<SinglePage />} />
+     ```
+     Each bouquet is assigned a unique ID, which is included in the route parameter `:id`.
+
+2. **Data Passing**:
+   - The `Home` component links to each bouquet's page, passing the bouquet details via the `state` object:
+     ```javascript
+     <Link to={`/post/${bouquet.id}`} state={{ post: bouquet }} className="view-button">
+       View Flower
+     </Link>
+     ```
+
+3. **Dynamic Rendering**:
+   - The `SinglePage` component uses the `useLocation` hook to access the passed `state` and display the bouquet's details:
+     ```javascript
+     const location = useLocation();
+     const bouquet = location.state?.post;
+     ```
+   - If the data is missing, a fallback message is displayed.
+
+4. **Content Display**:
+   - Each bouquet page includes its name, image, price, detailed description, and care instructions.
+
+This feature ensures a personalized and seamless user experience for browsing detailed flower pages.
+
+---
+
+## How to Run
 
 1. **Install dependencies**:
    ```bash
@@ -85,7 +122,6 @@ This repository contains a full-stack project using React for the frontend and N
 
 ---
 
-
 ## Notes
 
 - This project is designed to demonstrate fundamental skills in React and Node.js.
@@ -95,4 +131,11 @@ This repository contains a full-stack project using React for the frontend and N
 
 ## Acknowledgments
 
- Images were sourced from Pinterest.
+Images were sourced from Pinterest.
+
+
+Have a great day ♡
+
+![CUTECAT](https://github.com/user-attachments/assets/e0a1f793-2aad-4b65-9102-23d40a738d52)
+
+
