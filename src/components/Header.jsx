@@ -5,7 +5,7 @@ import logo from '../assets/images//LogoFlowerShop.png';
 
 function Header() {
   return (
-    <div>
+    <header>
       <div className='head-menu'>
 
         <nav>
@@ -46,7 +46,7 @@ function Header() {
         </div>
       </div>
 
-    </div>
+    </header>
 
   );
 }

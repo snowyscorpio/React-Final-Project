@@ -1,5 +1,5 @@
 {
-  "name": "kuku",
+  "name": "finalproject",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,5 +32,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

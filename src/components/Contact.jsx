@@ -1,14 +1,12 @@
 import React from 'react';
-import logo from '../assets/images/LogoFlowerShop.png';
+import Title from './Title';
+
 
 function Contact() {
   return (
     <div className="main">
-      <div className="title">
-        <img src={logo} alt="store's logo" className="logo" />
-        <h1>MOON's FLOWER SHOP</h1>
-      </div>
-      <h4 className="names">by LOREN RACHEL CHEZRONY and SALEH KHATIB</h4>
+
+      < Title />
       <div className="contact">
         <h2>Contact Us</h2>
         <p className="p-contact-upper">Hello Beautiful Thing, Here You Can Contact Us</p>

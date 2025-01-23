@@ -13,16 +13,18 @@ function SinglePage() {
     <section className="post-main">
       <div className="container">
         <div className="single-post">
+          <h1 className="post-title">{bouquet.name}</h1>
           <div className="upper-part-post">
-            <h1 className="post-title">{bouquet.name}</h1>
+
             <img src={bouquet.image} alt={bouquet.name} className="post-image" />
             <p className="post-price">{bouquet.price}</p>
           </div>
           <div className="info-part-post">
             <p className="post-detailed-description">{bouquet.detailedDescription}</p>
-                        </div>
-            <div className="button-container">
-              <button className="buy-button">Buy Me</button>
+            <p className="post-flower-instruction">{bouquet.instruction}</p>
+          </div>
+          <div className="button-container">
+            <button className="buy-button">Buy Me</button>
 
           </div>
         </div>
