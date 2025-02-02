@@ -94,7 +94,7 @@ body,
 
 }
 
-.nav-links-container{
+.nav-links-container {
   display: flex;
   margin-top: 10px;
   margin-bottom: 40px;
@@ -119,11 +119,6 @@ body,
 
 .nav-links a:hover {
   text-decoration: underline;
-  box-shadow: 1px 0 10px #ffffffa0;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 20px;
   background-color: #ffffff20;
 }
 
@@ -497,7 +492,7 @@ body,
 }
 
 .add-item-container {
-    margin: 40px auto;
+  margin: 40px auto;
   background-color: #d6bbbbd8;
   border-radius: 20px;
   padding: 20px;
@@ -533,10 +528,11 @@ body,
   height: 100px;
   resize: vertical;
 }
-.image-preview{
+
+.image-preview {
   width: 300px;
-    height: auto;
-    border-radius: 20px;
+  height: auto;
+  border-radius: 20px;
 }
 
 /* just for me */
@@ -601,6 +597,7 @@ body,
   background: #e0d7c6;
   transform: scale(1.05);
 }
+
 .choose-item-type label {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1rem;
@@ -611,6 +608,7 @@ body,
 .choose-item-type input {
   margin-right: 5px;
 }
+
 /* ****** */
 
 .add-item-form button {
@@ -669,6 +667,6 @@ h1 {
   font-size: 2.6rem;
 }
 
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
