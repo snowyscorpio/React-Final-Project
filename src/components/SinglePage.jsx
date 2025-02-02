@@ -3,29 +3,35 @@ import { useLocation } from 'react-router-dom';
 
 function SinglePage() {
   const location = useLocation();
-  const bouquet = location.state?.post; // Extract bouquet data
+  const post = location.state?.post;
 
-  if (!bouquet) {
-    return <h2>Bouquet not found</h2>; // Handle case if data is missing
+  if (!post) {
+    return <h2 className="error-message">Item not found</h2>;
   }
 
   return (
     <section className="post-main">
       <div className="container">
         <div className="single-post">
-          <h1 className="post-title">{bouquet.name}</h1>
+          <h1 className="post-title">{post.name}</h1>
+
           <div className="upper-part-post">
-
-            <img src={bouquet.image} alt={bouquet.name} className="post-image" />
-            <p className="post-price">{bouquet.price}</p>
+            <img src={post.image} alt={post.name} className="post-image" />
+            <p className="post-price"><strong>Price:</strong> {post.price}</p>
           </div>
+
           <div className="info-part-post">
-            <p className="post-detailed-description">{bouquet.detailedDescription}</p>
-            <p className="post-flower-instruction">{bouquet.instruction}</p>
+            <h2 className="section-subtitle">Description</h2>
+            <p className="post-detailed-description">{post.detailedDescription}</p>
           </div>
-          <div className="button-container">
-            <button className="buy-button">Buy Me</button>
 
+          <div className="info-part-post">
+            <h2 className="section-subtitle">Care Instructions</h2>
+            <p className="post-flower-instruction">{post.instruction}</p>
+          </div>
+
+          <div className="button-container">
+            <button className="buy-button">Buy Now</button>
           </div>
         </div>
       </div>
