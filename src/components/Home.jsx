@@ -156,7 +156,7 @@ function Home() {
     detailedDescription: '',
     instruction: ``,
     price: '',
-    image: null, 
+    image: null,
     type: 'bouquet',
   });
 
@@ -179,6 +179,7 @@ function Home() {
         { ...newItem, id: prevState.bouquets.length + prevState.houseplants.length + 1 },
       ],
     }));
+    alert("Item added successfully!");
     setNewItem({ name: '', description: '', detailedDescription: '', instruction: ``, price: '', image: null, type: 'bouquet' });
   };
 
@@ -216,7 +217,7 @@ function Home() {
         </div>
       </div>
 
-      
+
       {/* Bouquets Section */}
       <div id="bouquets" className="bouquets-section">
         <h2 className="section-title">Flower Bouquets</h2>
