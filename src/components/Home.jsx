@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Title from './Title';
 import rose from '../assets/images/Roses.jpg';
@@ -12,7 +12,7 @@ import snakePlant from '../assets/images/Snake Plant.jpg';
 import zzPlant from '../assets/images/ZZ Plant.jpg';
 
 function Home() {
-  const [items, setItems] = useState({
+  const [items] = useState({
     bouquets: [
       {
         id: 1,
@@ -150,38 +150,11 @@ function Home() {
     ],
   });
 
-  const [newItem, setNewItem] = useState({
-    name: '',
-    description: '',
-    detailedDescription: '',
-    instruction: ``,
-    price: '',
-    image: null,
-    type: 'bouquet',
-  });
+  useEffect(() => {
+    console.log('Items state updated:', items);
+  }, [items]);
 
-  const handleChange = (e) => {
-    if (e.target.name === "image") {
-      const file = e.target.files[0];
-      if (file) {
-        setNewItem({ ...newItem, image: URL.createObjectURL(file) });
-      }
-    } else {
-      setNewItem({ ...newItem, [e.target.name]: e.target.value });
-    }
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setItems((prevState) => ({
-      ...prevState,
-      [newItem.type === 'bouquet' ? 'bouquets' : 'houseplants']: [
-        ...prevState[newItem.type === 'bouquet' ? 'bouquets' : 'houseplants'],
-        { ...newItem, id: prevState.bouquets.length + prevState.houseplants.length + 1 },
-      ],
-    }));
-    alert("Item added successfully!");
-    setNewItem({ name: '', description: '', detailedDescription: '', instruction: ``, price: '', image: null, type: 'bouquet' });
-  };
+
 
   return (
     <div className="main">
@@ -193,31 +166,12 @@ function Home() {
           <a href="#houseplants">Houseplants</a>
         </nav>
       </div>
-      <div className="add-item-section">
-        <h2>Add a New Item</h2>
-        <div className="add-item-container">
-          <form onSubmit={handleSubmit} className="add-item-form">
-            <input type="text" name="name" placeholder="Name" value={newItem.name} onChange={handleChange} required />
-            <input type="text" name="description" placeholder="Description" value={newItem.description} onChange={handleChange} required />
-            <textarea name="detailedDescription" placeholder="Detailed Description" value={newItem.detailedDescription} onChange={handleChange} required />
-            <textarea name="instruction" placeholder="Care Instructions" value={newItem.instruction} onChange={handleChange} required />
-            <input type="text" name="price" placeholder="Price" value={newItem.price} onChange={handleChange} required />
-            <input type="file" name="image" accept="image/*" onChange={handleChange} required className="file-input" />
-            {newItem.image && <img src={newItem.image} alt="Preview" className="image-preview" />}
-            <div className="choose-item-type">
-              <label>
-                <input type="radio" name="type" value="bouquet" checked={newItem.type === 'bouquet'} onChange={handleChange} /> Bouquet
-              </label>
-              <label>
-                <input type="radio" name="type" value="houseplant" checked={newItem.type === 'houseplant'} onChange={handleChange} /> Houseplant
-              </label>
-            </div>
-            <button type="submit">Add Item</button>
-          </form>
-        </div>
+              <h2 className="add-item-title">Add a New Item</h2>
+              <div className="add-item-button-container">
+
+        <Link to="/createpost" className="add-item-button">Add A New Item</Link>
+
       </div>
-
-
       {/* Bouquets Section */}
       <div id="bouquets" className="bouquets-section">
         <h2 className="section-title">Flower Bouquets</h2>
@@ -230,6 +184,13 @@ function Home() {
                 <p className="article-description">{bouquet.description}</p>
                 <p className="article-price">{bouquet.price}</p>
                 <Link to={`/post/${bouquet.id}`} state={{ post: bouquet }} className="view-button">View Flower</Link>
+                <Link
+                  to={`/editpost/${bouquet.id}`}
+                  state={{ post: bouquet }}
+                  className="edit-button"
+                >
+                  Edit
+                </Link>
               </div>
             </div>
           ))}
@@ -248,6 +209,13 @@ function Home() {
                 <p className="article-description">{plant.description}</p>
                 <p className="article-price">{plant.price}</p>
                 <Link to={`/post/${plant.id}`} state={{ post: plant }} className="view-button">View Plant</Link>
+                <Link
+                  to={`/editpost/${plant.id}`}
+                  state={{ post: plant }}
+                  className="edit-button"
+                >
+                  Edit
+                </Link>
               </div>
             </div>
           ))}

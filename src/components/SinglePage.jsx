@@ -31,7 +31,7 @@ function SinglePage() {
           </div>
 
           <div className="button-container">
-            <button className="buy-button">Buy Now</button>
+            <button className="buy-button">Add To Cart</button>
           </div>
         </div>
       </div>

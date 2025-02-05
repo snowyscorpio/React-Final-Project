@@ -8,13 +8,9 @@ function About() {
     <div className="main">
 
       < Title />
-      {/* <img
-          src={banner}
-          alt="banner"
-          className="banner-image"
-        /> */}
+
       <div className="about-container">
-        <h2>Who Are We?</h2>
+        <h2 className="about-title">Who Are We?</h2>
         <div className="about">
           <p>
             Welcome  to  MOON's  Flower  Shop,  a  project  created  by  Loren  and  Saleh  with  a  shared  vision  to  bring  the  beauty  of  nature  into  your  life.
