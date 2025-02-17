@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Title from './Title';
+import axios from 'axios';
 
 function EditPost() {
   const location = useLocation();
   const navigate = useNavigate();
-  const post = location.state?.post || { name: '', description: '', detailedDescription: '', instruction: '', price: '', type: '' };
+  const post = location.state?.post || { name: '', description: '', detailedDescription: '', instruction: '', price: '', type: '', image: null };
 
   const [editedItem, setEditedItem] = useState(post);
 
@@ -19,7 +20,7 @@ function EditPost() {
       if (file) {
         setEditedItem((prev) => ({
           ...prev,
-          image: URL.createObjectURL(file),
+          image: file, 
         }));
       }
     } else {
@@ -30,15 +31,20 @@ function EditPost() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!editedItem.type) {
       alert('Please select an item type (Bouquet or Houseplant)');
       return;
     }
 
-    console.log('Edited item:', editedItem);
-    alert('Item edited successfully!');
+    try {
+      await axios.put(`/api/items/${editedItem.id}`, editedItem);
+      alert('Item edited successfully!');
+    } catch (error) {
+      console.error('Error editing item:', error);
+      alert('Error editing item');
+    }
 
     navigate('/');
   };
@@ -56,9 +62,8 @@ function EditPost() {
           <input type="text" name="price" value={editedItem.price} onChange={handleChange} required />
           <div className="file-input-container">
             <input type="file" name="image" accept="image/*" onChange={handleChange} className="file-input" />
-            {editedItem.image && <img src={editedItem.image} alt="Preview" className="image-preview" />}
+            {editedItem.image && <img src={typeof editedItem.image === 'string' ? editedItem.image : URL.createObjectURL(editedItem.image)} alt="Preview" className="image-preview" />}
           </div>
-
 
           <p className="choose-item-type-p">Choose Item's Type</p>
           <div className="choose-item-type">
@@ -70,7 +75,7 @@ function EditPost() {
             </label>
           </div>
 
-          <button type="submit" >Save Changes</button>
+          <button type="submit">Save Changes</button>
         </form>
       </div>
     </div>

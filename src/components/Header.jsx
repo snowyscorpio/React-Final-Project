@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/images//LogoFlowerShop.png';
+import logo from '../assets/images/LogoFlowerShop.png';
+import logInIcon from '../assets/images/login.png';
 
 
 function Header() {
@@ -18,7 +19,7 @@ function Header() {
                 }
                 end
               >
-                Home
+                ⟡ Home ⟡
               </NavLink>
             </li>
             <li>
@@ -27,7 +28,7 @@ function Header() {
                 className={({ isActive }) =>
                   isActive ? 'menu-item active' : 'menu-item'
                 }>
-                About
+                ⟡ About ⟡
               </NavLink>
             </li>
             <li>
@@ -36,13 +37,18 @@ function Header() {
                 className={({ isActive }) =>
                   isActive ? 'menu-item active' : 'menu-item'
                 }>
-                Contact
+                ⟡ Contact ⟡
               </NavLink>
             </li>
           </ul>
         </nav>
         <div>
+          <NavLink
+            to='/login'>
+            <img src={logInIcon} alt="logIn's logo" className="logIn-logo" />
+          </NavLink>
           <img src={logo} alt="store's logo" className="logo-small" />
+
         </div>
       </div>
 

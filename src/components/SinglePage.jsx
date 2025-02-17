@@ -21,12 +21,12 @@ function SinglePage() {
           </div>
 
           <div className="info-part-post">
-            <h2 className="section-subtitle">Description</h2>
+            <h2>Description</h2>
             <p className="post-detailed-description">{post.detailedDescription}</p>
           </div>
 
           <div className="info-part-post">
-            <h2 className="section-subtitle">Care Instructions</h2>
+            <h2>Care Instructions</h2>
             <p className="post-flower-instruction">{post.instruction}</p>
           </div>
 

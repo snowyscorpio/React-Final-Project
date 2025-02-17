@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Title from './Title';
+import axios from 'axios';
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function CreatePost() {
       if (file) {
         setNewItem((prev) => ({
           ...prev,
-          image: URL.createObjectURL(file),
+          image: file, 
         }));
       }
     } else {
@@ -35,15 +36,21 @@ function CreatePost() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newItem.type) {
       alert('Please select an item type (Bouquet or Houseplant)');
       return;
     }
 
-    console.log('Submitting item:', newItem);
-    alert('Item added successfully!');
+    try {
+
+      await axios.post('/api/items', newItem);
+      alert('Item added successfully!');
+    } catch (error) {
+      console.error('Error adding item:', error);
+      alert('Error adding item');
+    }
 
     setNewItem({
       name: '',
@@ -71,12 +78,11 @@ function CreatePost() {
           <input type="text" name="price" placeholder="Price" value={newItem.price} onChange={handleChange} required />
           <div className="file-input-container">
             <input type="file" name="image" accept="image/*" onChange={handleChange} required className="file-input" />
-            {newItem.image && <img src={newItem.image} alt="Preview" className="image-preview" />}
+            {newItem.image && <img src={URL.createObjectURL(newItem.image)} alt="Preview" className="image-preview" />}
           </div>
 
           <p className="choose-item-type-p">Choose Item's Type</p>
           <div className="choose-item-type">
-
             <label>
               <input type="radio" name="type" value="bouquet" checked={newItem.type === 'bouquet'} onChange={handleChange} required /> Bouquet
             </label>

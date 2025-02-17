@@ -6,8 +6,12 @@ import EditPost from './EditPost';
 import About from './About';
 import Contact from './Contact';
 import SinglePage from './SinglePage';
-import Header from './Header';
 import Footer from './Footer';
+import Header from './Header';
+import LogIn from './LogIn';
+
+
+
 
 function MyRoutes() {
   return (
@@ -20,6 +24,8 @@ function MyRoutes() {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/post/:id' element={<SinglePage />} />
+        <Route path='/login' element={<LogIn />} />
+        {/* <Route path='/register' element={<Register />} /> */}
       </Routes>
       <Footer />
     </>

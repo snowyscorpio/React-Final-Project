@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import Title from './Title';
+import facebook from '../assets/images/facebook.png';
+import instagram from '../assets/images/instagram.png';
+import twitter from '../assets/images/twitter.png';
+import pinterest from '../assets/images/pinterest.png';
+
+
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -24,16 +30,50 @@ function Contact() {
     <div className="main">
       <Title />
       <div className="contact-title">
-      <h2>Contact Us</h2>
+        <h2>Contact Us</h2>
       </div>
       <div className="contact">
-        <p className="p-contact-upper">Hello Beautiful Thing, Here You Can Contact Us</p>
-        <form onSubmit={handleSubmit}>
-          <p className="p-contact">First Name</p>
-          <input type="text" name="first_name" className="input-contact" value={formData.first_name} onChange={handleChange} />
 
-          <p className="p-contact">Last Name</p>
-          <input type="text" name="last_name" className="input-contact" value={formData.last_name} onChange={handleChange} />
+        <p className="p-contact-upper">Hello Beautiful Thing, Here You Can Contact Us</p>
+
+        <div className='social-links'>
+          <p className="p-contact-upper">Our Socials</p>
+          <nav>
+            <ul>
+              <li>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                  <img src={facebook} alt="facebook" className="social-logo" />
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                  <img src={instagram} alt="instagram" className="social-logo" />
+                </a>
+              </li>
+
+              <li>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                  <img src={twitter} alt="twitter" className="social-logo" />
+                </a>
+              </li>
+
+              <li>
+                <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer">
+                  <img src={pinterest} alt="pinterest" className="social-logo" />
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <p className="p-contact-upper">Send Us A Message</p>
+          <p className="p-contact">Full Name</p>
+          <input type="text" name="full_name" className="input-contact" value={formData.full_name} onChange={handleChange} />
+
 
           <p className="p-contact">Email</p>
           <input type="email" name="email" className="input-contact" value={formData.email} onChange={handleChange} />
