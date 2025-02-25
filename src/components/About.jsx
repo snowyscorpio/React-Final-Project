@@ -9,7 +9,7 @@ function About() {
 
       < Title />
 
-      <div className="about-container">
+      <div className="container">
         <h2 className="about-title">Who Are We?</h2>
         <div className="about">
           <p>

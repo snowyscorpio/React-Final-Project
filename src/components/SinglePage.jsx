@@ -16,7 +16,9 @@ function SinglePage() {
           <h1 className="post-title">{post.name}</h1>
 
           <div className="upper-part-post">
-            <img src={post.image} alt={post.name} className="post-image" />
+            <div className="post-image-wrap">
+              <img src={post.image} alt={post.name} className="post-image" />
+            </div>
             <p className="post-price"><strong>Price:</strong> {post.price}</p>
           </div>
 

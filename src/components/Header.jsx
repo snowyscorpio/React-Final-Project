@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/images/LogoFlowerShop.png';
 import logInIcon from '../assets/images/login.png';
 
 
 function Header() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+
   return (
     <header>
       <div className='head-menu'>
@@ -43,9 +54,8 @@ function Header() {
           </ul>
         </nav>
         <div>
-          <NavLink
-            to='/login'>
-            <img src={logInIcon} alt="logIn's logo" className="logIn-logo" />
+          <NavLink to={user ? '/account' : '/login'}>
+            <img src={logInIcon} alt="User Icon" className="logIn-logo" />
           </NavLink>
           <img src={logo} alt="store's logo" className="logo-small" />
 

@@ -9,9 +9,9 @@ import SinglePage from './SinglePage';
 import Footer from './Footer';
 import Header from './Header';
 import LogIn from './LogIn';
-
-
-
+import Register from './SignIn';
+import NotFound from './NotFound'; 
+import Account from './Account';
 
 function MyRoutes() {
   return (
@@ -25,7 +25,9 @@ function MyRoutes() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/post/:id' element={<SinglePage />} />
         <Route path='/login' element={<LogIn />} />
-        {/* <Route path='/register' element={<Register />} /> */}
+        <Route path='/register' element={<Register />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="*" element={<NotFound />} /> 
       </Routes>
       <Footer />
     </>
