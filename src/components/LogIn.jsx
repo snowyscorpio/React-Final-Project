@@ -12,7 +12,6 @@ function LogIn() {
   });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
 
@@ -35,14 +34,22 @@ function LogIn() {
     e.preventDefault();
     try {
       const res = await axios.post('/users/login', formData, { withCredentials: true });
+
+      sessionStorage.setItem('userId', res.data.user.id);
+      sessionStorage.setItem('userName', res.data.user.name);
+      sessionStorage.setItem('userEmail', res.data.user.email);
+      sessionStorage.setItem('userRole', res.data.user.role);
+
+      window.dispatchEvent(new Event("storage"));
+
       alert('Login successful!');
-      setRole(res.data.user.role);
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);
       setError('Invalid credentials');
     }
   };
+
 
   return (
     <div className="main">
