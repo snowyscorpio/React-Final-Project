@@ -41,6 +41,7 @@ function SinglePage() {
 
       if (response.status === 201) {
         alert('Order added successfully!');
+        navigate('/shop');
       } else {
         alert(`Error: ${response.data.error}`);
       }

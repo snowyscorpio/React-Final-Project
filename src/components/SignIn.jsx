@@ -10,6 +10,7 @@ function SignIn() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    username: '',
     password: '',
   });
   const [error, setError] = useState('');
@@ -80,9 +81,57 @@ function SignIn() {
     return true; // Email is valid
   };
 
+  const validateName = (name) => {
+    if (name.length < 2) {
+      return false; // Name must have at least 2 characters
+    }
+
+    for (let i = 0; i < name.length; i++) {
+      let char = name[i];
+
+      // Allow only English letters (A-Z, a-z)
+      if (!((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z'))) {
+        return false; // Invalid character found
+      }
+    }
+
+    return true; // Name is valid
+  };
+
+  const validateUsername = (username) => {
+    if (username.length < 2) {
+      return false; // Username must have at least 2 characters
+    }
+
+    for (let i = 0; i < username.length; i++) {
+      let char = username[i];
+
+      // Allow only English letters (A-Z, a-z), numbers (0-9), underscore (_) and dot (.)
+      if (!((char >= 'a' && char <= 'z') ||
+        (char >= 'A' && char <= 'Z') ||
+        (char >= '0' && char <= '9') ||
+        char === '_' ||
+        char === '.')) {
+        return false; // Invalid character found
+      }
+    }
+
+    return true; // Username is valid
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateName(formData.name)) {
+      setError('Name must contain only English letters and be at least 2 characters long.');
+      return;
+    }
+
+    if (!validateUsername(formData.username)) {
+      setError('Username can only contain English letters, numbers, "_", and ".", and must be at least 2 characters long.');
+      return;
+    }
 
     if (!validateEmail(formData.email)) {
       setError('Email can only contain letters, numbers, ".", and "@". No spaces or special characters allowed.');
