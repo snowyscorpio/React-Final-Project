@@ -82,7 +82,6 @@ Beyond the basic requirements, the following improvements were made:
 
 - This project is designed to demonstrate fundamental skills in React and Node.js.
 - The focus is on functionality and project structure; advanced styling can be added as needed.
-- A folder with screenshots of all pages is also included.
 
 ---
 
