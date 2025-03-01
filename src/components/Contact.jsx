@@ -29,9 +29,9 @@ function Contact() {
   return (
     <div className="main">
       <Title />
-      <div className="contact-title">
+
         <h2>Contact Us</h2>
-      </div>
+
       <div className="contact">
 
         <p className="p-contact-upper">Hello Beautiful Thing, Here You Can Contact Us</p>

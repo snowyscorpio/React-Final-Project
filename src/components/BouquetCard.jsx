@@ -22,7 +22,7 @@ const BouquetCard = ({ items, isAdmin, handleDelete }) => {
                     state={{ post: bouquet }}
                     className="edit-button"
                   >
-                    Edit
+                    Edit 
                   </Link>
                   <button className="delete-button" onClick={() => handleDelete(bouquet)}>Delete</button>
                 </div>

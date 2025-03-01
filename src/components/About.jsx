@@ -1,14 +1,7 @@
 import React from 'react';
-import Title from './Title';
-
-import banner from '../assets/images/banner4.jpg';
 
 function About() {
   return (
-    <div className="main">
-
-      < Title />
-
       <div className="container">
         <h2 className="about-title">Who Are We?</h2>
         <div className="about">
@@ -20,14 +13,7 @@ function About() {
             Thank  you  for  supporting  our  project,  and  we  hope  our  flowers  and  plants  add  a  touch  of  joy  and  beauty  to  your  day.
           </p>
 
-
         </div>
-
-      </div>          <img
-        src={banner}
-        alt="banner"
-        className="banner-image"
-      />
 
     </div>
 

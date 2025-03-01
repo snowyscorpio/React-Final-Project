@@ -4,6 +4,7 @@ import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 import visibleIcon from '../assets/images/visible.png';
 import invisibleIcon from '../assets/images/invisible.png';
+import Loading from './Loading';
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ function SignIn() {
   });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -92,17 +94,22 @@ function SignIn() {
       return;
     }
 
+    setLoading(true);
     try {
       await axios.post('/users/register', formData, { withCredentials: true });
       alert('Registration successful!');
+      setLoading(false);
       navigate('/login');
     } catch (error) {
       console.error('Registration error:', error);
       setError('Error registering user');
+      setLoading(false);
     }
   };
 
-
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="main">
@@ -114,6 +121,8 @@ function SignIn() {
           <form onSubmit={handleSubmit}>
             <p className="login-label">Name</p>
             <input type="text" name="name" className="login-input" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
+            <p className="login-label">Username</p>
+            <input type="text" name="username" className="login-input" placeholder="Username" value={formData.username} onChange={handleChange} required />
             <p className="login-label">Email</p>
             <input type="email" name="email" className="login-input" placeholder="Email" value={formData.email} onChange={handleChange} required />
             <p className="login-label">Password</p>

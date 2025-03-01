@@ -1,72 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Title from './Title';
-import BouquetCard from './BouquetCard';
-import PlantCard from './PlantCard';
+import About from './About';
+import Loading from './Loading'; // ודא שהרכיב קיים
+import Preview from '../assets/images/home-pic.jpg';
 
 function Home() {
-  const [items, setItems] = useState([]);
-  const [msg, setMsg] = useState('');
-  const isAdmin = (req, res, next) => {
-    if (req.session.user && req.session.user.role === 'admin') {
-      return next();  // If the user is an administrator, move on to the next handler
-    }
-    return res.status(403).send('You do not have permission to perform this operation.');
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
+    const fetchUser = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('/users/current', { withCredentials: true });
+        setTimeout(() => {
+          if (response.data) {
+            setIsLoggedIn(true);
+          }
+          setLoading(false);
+        }, 1000);
+      } catch (error) {
+        setTimeout(() => {
+          setIsLoggedIn(false);
+          setLoading(false);
+        }, 1000);
+      }
+    };
+
+    fetchUser();
   }, []);
 
-  const fetchData = () => {
-    axios.get('products')
-      .then(res => {
-        setItems(res.data);
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  };
-
-  const handleDelete = (post) => {
-    if (window.confirm(`Are you sure you want to delete post: ${post.title}`)) {
-      axios.delete(`/products/${post.id}`)
-        .then(res => {
-          setItems(items.filter(item => item.id !== post.id));
-          setMsg('Post was deleted');
-          window.alert(msg);
-        })
-        .catch(error => {
-          console.error('Error deleting post:', error);
-        });
-    }
-  };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="main">
       <Title />
-
-      <div className="container">
-        <h2 className="all-products">All Products</h2>
-
-        <div className="nav-links-container">
-          <nav className="nav-links">
-            <a href="#bouquets">Bouquets</a>
-            <a href="#houseplants">Houseplants</a>
-          </nav>
-        </div>
-
-        <div className="all-products-container">
-          {isAdmin && (
-            <div className="add-item-button-container">
-              <Link to="/createpost" className="add-item-button">Add New Products</Link>
-            </div>
-          )}
-
-          <BouquetCard items={items} isAdmin={isAdmin} handleDelete={handleDelete} />
-          <PlantCard items={items} isAdmin={isAdmin} handleDelete={handleDelete} />
+      <h2>Welcome!</h2>
+      <div className="home-container">
+        <div className="home-info-wrap">
+          <img src={Preview} alt="home-pic" className="home-pic" />
+          <div className="login-home-container">
+            <About />
+            {isLoggedIn ? (
+              <div className="login-button-container">
+                <p className="p-contact-upper">Thank You For Logging In And Joining Us</p>
+                <Link to={`/shop`} className="login-button-home">Shop Now</Link>
+              </div>
+            ) : (
+              <div className="login-button-container">
+                <p className="p-contact-upper">Please Log In To View The Shop</p>
+                <Link to={`/login`} className="login-button-home">Log in</Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
